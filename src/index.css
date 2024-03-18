@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.title-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title-section h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.title-section p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #666;
+}
+
+
+.flex-chat-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 20px;
+  height: 500px;
+}
+
+.flex-chat-section .rooms {
+  width: 30%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.flex-chat-section .rooms h2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.flex-chat-section .rooms hr {
+  margin-bottom: 20px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #F5455C;
+  width: 10%;
+  border: none;
+}
+
+.flex-chat-section .rooms ul {
+  list-style: none;
+}
+
+.flex-chat-section .rooms ul li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.3s ease;
+  background-color: #F6F9FE;
+  border-radius: 5px;
+}
+
+.flex-chat-section .rooms ul li:hover {
+  color: #f4f4f4;
+  background-color: #F5455C;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.flex-chat-section .rooms ul li.selected {
+  color: #f4f4f4;
+  background-color: #F5455C;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.flex-chat-section .messages {
+  width: 70%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.flex-chat-section .messages .messages-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-chat-section .messages .messages-container {
+  height: 80%;
+  overflow: auto;
+}
+
+.flex-chat-section .messages-col .form {
+  height: 20%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  border: 2px solid #F5455C;
+}
+
+.flex-chat-section .messages-col .form textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F6F9FE;
+  resize: none;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+}
+
+.flex-chat-section .messages-col button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5455C;
+  color: #f4f4f4;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.flex-chat-section .messages .load-message-alert {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.flex-chat-section .messages li {
+  margin-bottom: 20px;
+}
+
+.flex-chat-section .messages li .message {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #F6F9FE;
+}
+
+.flex-chat-section .messages li .message .user {
+  font-size: .9rem;
+  font-weight: 300;
+  color: #F5455C;
+}
+
+.flex-chat-section .messages li .message .text {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #333;
+}
+
+/* login UI */
+
+.login-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form input {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F6F9FE;
+  outline: none;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5455C;
+  color: #f4f4f4;
+  cursor: pointer;
+}
