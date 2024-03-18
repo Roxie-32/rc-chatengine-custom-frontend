@@ -9,18 +9,18 @@ const App = () => {
 	// State for auth token
 	const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
 
+	// State for chat
+	const [rooms, setRooms] = useState([]);
+	const [messages, setMessages] = useState({}); // Messages stored by roomId
+	const [selectedRoom, setSelectedRoom] = useState(null);
+	const [messageInput, setMessageInput] = useState('');
+
 	// Websocket URL
 	const WS_URL = process.env.REACT_APP_WS_URL;
 
 	//Admin Credentials
 	const ADMIN_ACCESS_TOKEN = process.env.REACT_APP_ADMIN_ACCESS_TOKEN;
 	const ADMIN_USER_ID = process.env.REACT_APP_ADMIN_USER_ID;
-
-	// State for chat
-	const [rooms, setRooms] = useState([]);
-	const [messages, setMessages] = useState({}); // Messages stored by roomId
-	const [selectedRoom, setSelectedRoom] = useState(null);
-	const [messageInput, setMessageInput] = useState('');
 
 	// Login user
 	const loginUser = async (e) => {
@@ -40,18 +40,18 @@ const App = () => {
 			const user_Id = data.data.userId;
 
 
-			// Create authentication token for the user
+			// Create authentication token for the user on Rocket.Chat
 			const tokenResponse = await fetch(`${process.env.REACT_APP_REST_URL}/users.createToken`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-User-Id': ADMIN_USER_ID ,
-					'X-Auth-Token': ADMIN_ACCESS_TOKEN ,
+					'X-User-Id': ADMIN_USER_ID,
+					'X-Auth-Token': ADMIN_ACCESS_TOKEN,
 				},
 				body: JSON.stringify({ userId: user_Id }),
 
 			});
-			
+
 
 			const tokenData = await tokenResponse.json();
 			const authToken = tokenData.data.authToken;
@@ -68,7 +68,7 @@ const App = () => {
 		onOpen: () => {
 			console.log('WebSocket Connected');
 
-			// 1- do connect
+			// 1- connect
 			sendMessage(
 				JSON.stringify({
 					msg: 'connect',
@@ -77,7 +77,7 @@ const App = () => {
 				})
 			);
 
-			// 2- do login
+			// 2- login
 			sendMessage(
 				JSON.stringify({
 					msg: 'method',
@@ -99,6 +99,8 @@ const App = () => {
 		},
 		onMessage: (event) => {
 			const data = JSON.parse(event.data);
+
+			// pong the Server
 			if (data.msg === 'ping') {
 				sendMessage(JSON.stringify({ msg: 'pong' }));
 			}
@@ -154,6 +156,27 @@ const App = () => {
 		},
 	});
 
+	// Send chat message
+	const sendChatMessage = (e, roomId) => {
+		e.preventDefault();
+		if (messageInput && roomId) {
+			sendMessage(
+				JSON.stringify({
+					msg: 'method',
+					method: 'sendMessage',
+					id: '423',
+					params: [
+						{
+							rid: roomId,
+							msg: messageInput,
+						},
+					],
+				})
+			);
+			setMessageInput('');
+		}
+	};
+
 	// Load rooms from local storage
 	useEffect(() => {
 		localStorage.clear();
@@ -200,26 +223,7 @@ const App = () => {
 		});
 	};
 
-	// Send chat message
-	const sendChatMessage = (e, roomId) => {
-		e.preventDefault();
-		if (messageInput && roomId) {
-			sendMessage(
-				JSON.stringify({
-					msg: 'method',
-					method: 'sendMessage',
-					id: '423',
-					params: [
-						{
-							rid: roomId,
-							msg: messageInput,
-						},
-					],
-				})
-			);
-			setMessageInput('');
-		}
-	};
+
 
 	return (
 		<div className="container">
